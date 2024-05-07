@@ -8,7 +8,7 @@ import DatePicker from '@react-native-community/datetimepicker';
 export const InputFieldDate = (props) => {
   const lable = props.lable || "Label";
   const icon = props.icon || faQuestion;
-  const onChangeText = props.onChangeText || (() => {});
+  const onChangeText = props.onChangeText || (() => { });
   const iconColor = props.iconColor || "white";
   const labelColor = props.labelColor || "white";
   const width = props.width || widthPercentageToDP(80);
@@ -35,27 +35,27 @@ export const InputFieldDate = (props) => {
       <View style={{ flexDirection: "row", alignItems: multipleLines ? "flex-start" : "center", backgroundColor: "white", width: width, paddingHorizontal: widthPercentageToDP(5), height: multipleLines ? heightPercentageToDP(11.5) : height, borderRadius: 5, borderColor: color, borderWidth: 0.5, paddingTop: multipleLines ? heightPercentageToDP(1) : 0 }}>
         <FontAwesomeIcon icon={icon} size={20} color={iconColor} style={{ marginRight: 5 }} />
         <TouchableOpacity onPress={() => setToggle(!toggle)} style={{ flex: 1 }}>
-          <Text style={[Gstyle.h4, { paddingLeft: 8 }]}>{defaultValue ? defaultValue.toLocaleDateString() : selectedDate.toLocaleDateString()}</Text>
+          <Text style={[Gstyle.h4, Gstyle.black, { paddingLeft: 8 }]}>{defaultValue ? defaultValue.toLocaleDateString() : selectedDate.toLocaleDateString()}</Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection:'row',justifyContent:'flex-start',width:width,marginTop:heightPercentageToDP(1)}}>
-        {error && <Text style={{color:'red'}}>{error}</Text>}
-        </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: width, marginTop: heightPercentageToDP(1) }}>
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      </View>
       {toggle && (
-        <View style={{marginTop:heightPercentageToDP(1)}}>
-        <DatePicker
-          value={defaultValue || selectedDate}
-          mode="datetime"
-          display="calendar"
-          onChange={(event, date) => {
-            setOpen(false);
-            setToggle(false);
-            if (date) {
-              setSelectedDate(date);
-              onChangeText(date);
-            }
-          }}
-        />
+        <View style={{ marginTop: heightPercentageToDP(1) }}>
+          <DatePicker
+            value={defaultValue || selectedDate}
+            mode="datetime"
+            display="calendar"
+            onChange={(event, date) => {
+              setOpen(false);
+              setToggle(false);
+              if (date) {
+                setSelectedDate(date);
+                onChangeText(date);
+              }
+            }}
+          />
         </View>
       )}
     </View>

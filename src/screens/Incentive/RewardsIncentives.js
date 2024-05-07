@@ -8,20 +8,20 @@ import { SchemeTable } from "../../components/Table/SchemeTable";
 
 const RewardsIncentives = () => {
   return (
-    <ScrollView style={{height:heightPercentageToDP(100)}}>
+    <ScrollView style={{ height: heightPercentageToDP(100) }}>
 
-    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: widthPercentageToDP(5), backgroundColor: "#f2f2f2" }}>
-      <Text>Scheme - <Text style={{ color: '#C82026' }}>04/01/2024 to 30/04/2024</Text></Text>
-      <View style={{ marginBottom: heightPercentageToDP(1) }} />
-    
-     { dataRewards.map((item, index) => (
-        <View key={index} style={{marginVertical:heightPercentageToDP(1)}}>
-          <ProgressBar
-            {...item}
-          />
-        </View>
-      ))}
-    </View>
+      <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: widthPercentageToDP(5), backgroundColor: "#f2f2f2" }}>
+        <Text style={{ color: "#333333" }}>Scheme - <Text style={{ color: '#C82026' }}>04/01/2024 to 30/04/2024</Text></Text>
+        <View style={{ marginBottom: heightPercentageToDP(1) }} />
+
+        {dataRewards.map((item, index) => (
+          <View key={index} style={{ marginVertical: heightPercentageToDP(1) }}>
+            <ProgressBar
+              {...item}
+            />
+          </View>
+        ))}
+      </View>
     </ScrollView>
 
   );

@@ -11,34 +11,34 @@ import { APIService } from '../../API/Service';
 import moment from 'moment';
 
 const LeadDetails = (props) => {
-    const [data, setData] = useState({});
+    const [item, setData] = useState(props?.route?.params?.item);
     const [history, setHistory] = useState({});
     const [leadInfo, setLeadInfo] = useState({});
     console.log("props.route.params.item--->", props?.route?.params?.item);
-    const item = props?.route?.params?.item
+    // const item = props?.route?.params?.item
     useEffect(() => {
         const callHistoryDetails = async () => {
             const response = await APIService.historyLead(item?.leadId)
-           if(!response?.data?.success){
-            Alert.alert('Error',response?.data?.message)
-           }
-           setHistory(response?.data?.payload)
+            if (!response?.data?.success) {
+                Alert.alert('Error', response?.data?.message)
+            }
+            setHistory(response?.data?.payload)
         }
         callHistoryDetails()
         const callPersonalDetails = async () => {
             const response = await APIService.leadPersonalDetails(item?.leadId)
-           if(!response?.data?.success){
-            Alert.alert('Error',response?.data?.message)
-           }
-           setLeadInfo(response?.data?.payload)
+            if (!response?.data?.success) {
+                Alert.alert('Error', response?.data?.message)
+            }
+            setLeadInfo(response?.data?.payload)
         }
         callPersonalDetails()
     }, [])
 
     const renderHistoryItem = ({ item }) => (
         <View style={styles.historyItem}>
-            <View style={{width:widthPercentageToDP(10)}}>
-            <FontAwesomeIcon icon={faMicrophone} size={20} color={'#C82026'} />
+            <View style={{ width: widthPercentageToDP(10) }}>
+                <FontAwesomeIcon icon={faMicrophone} size={20} color={'#C82026'} />
             </View>
             <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{moment(item.logDate).format('DD/MM/YYYY')}</Text>
             <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.firstName}</Text>
@@ -56,7 +56,7 @@ const LeadDetails = (props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
                         <Text style={[Gstyle.h2, Gstyle.redTheme]}>Personal Info</Text>
                         <TouchableOpacity
-                            onPress={() => props.navigation.navigate('PersonalInfo',{item:leadInfo})}
+                            onPress={() => props.navigation.navigate('PersonalInfo', { item: leadInfo })}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size={20} color={"#C82026"} />
                         </TouchableOpacity>
@@ -94,7 +94,7 @@ const LeadDetails = (props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
                         <Text style={[Gstyle.h2, Gstyle.redTheme]}>Lead Info</Text>
                         <TouchableOpacity
-                            onPress={() => props.navigation.navigate('LeadInfo',{item:leadInfo})}
+                            onPress={() => props.navigation.navigate('LeadInfo', { item: leadInfo })}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size={20} color={"#C82026"} />
                         </TouchableOpacity>
@@ -132,7 +132,7 @@ const LeadDetails = (props) => {
                     <View style={{ marginTop: heightPercentageToDP(2), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View>
                             <Text style={{ color: 'gray' }}>Remarks</Text>
-                            <Text style={[Gstyle.h4, Gstyle.black]}>{}</Text>
+                            <Text style={[Gstyle.h4, Gstyle.black]}>{ }</Text>
                         </View>
                     </View>
                 </View>
@@ -157,7 +157,7 @@ const LeadDetails = (props) => {
                             <Text style={[Gstyle.h4, Gstyle.black]}>{item?.leadDepositDueAmount}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.checkboxContainer} onPress={() => { setData({ ...data, sendPaymentLink: !data?.sendPaymentLink }) }}>
+                    <TouchableOpacity style={styles.checkboxContainer} onPress={() => { setData({ ...item, isPaymentLinkSent: !item?.isPaymentLinkSent }) }}>
                         <View style={styles.checkbox}>
                             {item?.isPaymentLinkSent && <FontAwesomeIcon icon={faCheck} size={20} color={'#C82026'} />}
                         </View>
@@ -168,7 +168,7 @@ const LeadDetails = (props) => {
                         icon={faAddressCard}
                         placeholder="Enter amount"
                         defaultValue=""
-                        onChangeText={(text) => { setData({ ...data, amount: text }) }}
+                        onChangeText={(text) => { setData({ ...item, amount: text }) }}
                         keyboardType="default"
                         returnKeyType="done"
                         placeholderTextColor="#838383"
@@ -177,7 +177,7 @@ const LeadDetails = (props) => {
                         width={widthPercentageToDP(80)}
                     />
                 </View>
-                <View style={{  width: widthPercentageToDP(90), marginBottom: heightPercentageToDP(2) }}>
+                <View style={{ width: widthPercentageToDP(90), marginBottom: heightPercentageToDP(2) }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
                         <Text style={[Gstyle.h2, Gstyle.redTheme]}>History</Text>
                     </View>

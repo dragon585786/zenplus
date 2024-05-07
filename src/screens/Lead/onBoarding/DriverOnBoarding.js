@@ -13,40 +13,43 @@ import { InputFieldUpload } from '../../../components/inputs/InputFieldUpload';
 import { InputFieldSelect } from '../../../components/inputs/InputFieldSelect';
 import { Button } from '../../../components/buttons/blackButton';
 
-const Header = (props)  => {
+const Header = (props) => {
     const name = props?.name ? props?.name : "Title";
     const required = props?.required ? props?.required : false;
     const hideBottomLine = props?.hideBottomLine ? props?.hideBottomLine : false;
-    return (<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',borderBottomColor:'#DDDDDD',
-    borderBottomWidth:hideBottomLine ? 0 : 0.8,paddingBottom:hideBottomLine ? 0 : heightPercentageToDP(1),marginBottom:hideBottomLine ? 0 : heightPercentageToDP(2) }}>
-    <Text style={[Gstyle.h3, {color:'#444'}]}>{name}<Text style={{color:'red'}}>{required ? "*" : ""}</Text></Text>
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',width:widthPercentageToDP(20) }}>
-      <TouchableOpacity>
-        <FontAwesomeIcon icon={faCamera} size={15} color={"red"}  />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <FontAwesomeIcon icon={faEye} size={15} color={"red"}  />
-        </TouchableOpacity>
-        <TouchableOpacity>
-        <FontAwesomeIcon icon={faTrash} size={15} color={"red"}  />
-        </TouchableOpacity>
-    </View>
-</View>)};
+    return (<View style={{
+        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomColor: '#DDDDDD',
+        borderBottomWidth: hideBottomLine ? 0 : 0.8, paddingBottom: hideBottomLine ? 0 : heightPercentageToDP(1), marginBottom: hideBottomLine ? 0 : heightPercentageToDP(2)
+    }}>
+        <Text style={[Gstyle.h3, { color: '#444' }]}>{name}<Text style={{ color: 'red' }}>{required ? "*" : ""}</Text></Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: widthPercentageToDP(20) }}>
+            <TouchableOpacity>
+                <FontAwesomeIcon icon={faCamera} size={15} color={"red"} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <FontAwesomeIcon icon={faEye} size={15} color={"red"} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <FontAwesomeIcon icon={faTrash} size={15} color={"red"} />
+            </TouchableOpacity>
+        </View>
+    </View>)
+};
 const DriverOnBoarding = (props) => {
     const [data, setData] = useState({});
     return (
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: widthPercentageToDP(5),backgroundColor:'#f2f2f2' }}>
-<ScrollView
-showsVerticalScrollIndicator={false}
->
+        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: widthPercentageToDP(5), backgroundColor: '#f2f2f2' }}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
 
-        <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"Aadhar Card"}
-                required={true}
-                />
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"Aadhar Card"}
+                        required={true}
+                    />
 
-                <InputField
+                    <InputField
                         lable={"Aadhar Number"}
                         icon={faAddressCard}
                         placeholder="Enter aadhar number"
@@ -59,16 +62,16 @@ showsVerticalScrollIndicator={false}
                         labelColor="#444"
                         width={widthPercentageToDP(80)}
                     />
-            </View>
+                </View>
 
 
-        <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"PAN Card"}
-                required={true}
-                />
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"PAN Card"}
+                        required={true}
+                    />
 
-                <InputField
+                    <InputField
                         lable={"PAN Number"}
                         icon={faAddressCard}
                         placeholder="Enter pan number"
@@ -81,16 +84,16 @@ showsVerticalScrollIndicator={false}
                         labelColor="#444"
                         width={widthPercentageToDP(80)}
                     />
-            </View>
+                </View>
 
 
-        <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"Driving License"}
-                required={true}
-                />
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"Driving License"}
+                        required={true}
+                    />
 
-                <InputField
+                    <InputField
                         lable={"Driving License Number"}
                         icon={faAddressCard}
                         placeholder="Enter driving license number"
@@ -105,42 +108,42 @@ showsVerticalScrollIndicator={false}
                         required={true}
                     />
                     <InputFieldDate
-                            lable={"Driving License  Expiry Date"}
-                            icon={faCalendarDays}
-                            placeholder="Select Date & Time"
-                            defaultValue=""
-                            onChangeText={(text) => { setData({ ...data, driving_license_expiry_date: text }) }}
-                            keyboardType="default"
-                            returnKeyType="done"
-                            placeholderTextColor="#838383"
-                            iconColor="#CFCFCF"
-                            labelColor="#444"
-                            width={widthPercentageToDP(80)}
-                        />
-            </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"Driver Photo(Selfi)"}
-                hideBottomLine={true}
-                />
-            </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"Police Clearance Certificate"}
-                required={true}
-                hideBottomLine={true}
-                />
-            </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Header 
-                name={"Court record status"}
-                required={true}
-                hideBottomLine={true}
-                />
-            </View>
+                        lable={"Driving License  Expiry Date"}
+                        icon={faCalendarDays}
+                        placeholder="Select Date & Time"
+                        defaultValue=""
+                        onChangeText={(text) => { setData({ ...data, driving_license_expiry_date: text }) }}
+                        keyboardType="default"
+                        returnKeyType="done"
+                        placeholderTextColor="#838383"
+                        iconColor="#CFCFCF"
+                        labelColor="#444"
+                        width={widthPercentageToDP(80)}
+                    />
+                </View>
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"Driver Photo(Selfi)"}
+                        hideBottomLine={true}
+                    />
+                </View>
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"Police Clearance Certificate"}
+                        required={true}
+                        hideBottomLine={true}
+                    />
+                </View>
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Header
+                        name={"Court record status"}
+                        required={true}
+                        hideBottomLine={true}
+                    />
+                </View>
 
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <InputField
                         lable={"Fathers Name"}
                         icon={faUser}
                         placeholder="Enter fathers name"
@@ -153,12 +156,12 @@ showsVerticalScrollIndicator={false}
                         labelColor="#444"
                         width={widthPercentageToDP(80)}
                     />
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
                     <Text style={[Gstyle.h2, Gstyle.redTheme]}>Emergency Contact</Text>
                 </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <InputField
                         lable={"Name"}
                         icon={faUser}
                         placeholder="Enter name"
@@ -172,7 +175,7 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                       <InputField
+                    <InputField
                         lable={"Mobile Number"}
                         icon={faPhone}
                         placeholder="Enter mobile number"
@@ -186,7 +189,7 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                     <InputField
+                    <InputField
                         lable={"Relationship"}
                         icon={faUser}
                         placeholder="Enter relationship"
@@ -200,16 +203,16 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                    <TouchableOpacity style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
-<Text style={{color:"#121212"}}>+ Add Emergency Contact</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                        <Text style={{ color: "#121212" }}>+ Add Emergency Contact</Text>
                     </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
                     <Text style={[Gstyle.h2, Gstyle.redTheme]}>Guarantor Details</Text>
                 </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Text style={[Gstyle.h4,{marginBottom:heightPercentageToDP(2)}]}>Guarantor 1</Text>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Text style={[Gstyle.h4, Gstyle.black, { marginBottom: heightPercentageToDP(2) }]}>Guarantor 1</Text>
+                    <InputField
                         lable={"Name"}
                         icon={faUser}
                         placeholder="Enter name"
@@ -223,7 +226,7 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                       <InputField
+                    <InputField
                         lable={"Mobile Number"}
                         icon={faPhone}
                         placeholder="Enter mobile number"
@@ -237,7 +240,7 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                     <InputField
+                    <InputField
                         lable={"Relationship"}
                         icon={faUser}
                         placeholder="Enter relationship"
@@ -251,7 +254,7 @@ showsVerticalScrollIndicator={false}
                         width={widthPercentageToDP(80)}
                         required={true}
                     />
-                     <InputFieldUpload
+                    <InputFieldUpload
                         lable={"ID Proof"}
                         icon={faFileArrowUp}
                         placeholder="Upload Document/Image"
@@ -266,17 +269,17 @@ showsVerticalScrollIndicator={false}
                         optionInput={" (Aadhar Card, Driving License, Voter ID)"}
                         required={true}
                     />
-                    <TouchableOpacity style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
-<Text style={{color:"#121212"}}>+ Add Guarantor</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                        <Text style={{ color: "#121212" }}>+ Add Guarantor</Text>
                     </TouchableOpacity>
-            </View>
+                </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
                     <Text style={[Gstyle.h2, Gstyle.redTheme]}>Current Address</Text>
                 </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-                <Text style={[Gstyle.h4,{marginBottom:heightPercentageToDP(2)}]}>Current Address</Text>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <Text style={[Gstyle.h4, Gstyle.black, { marginBottom: heightPercentageToDP(2) }]}>Current Address</Text>
+                    <InputField
                         lable={"Street"}
                         icon={faUser}
                         placeholder="Enter street"
@@ -291,7 +294,7 @@ showsVerticalScrollIndicator={false}
                         required={true}
                         hideLeftIcon={true}
                     />
-                       <InputField
+                    <InputField
                         lable={"State"}
                         icon={faPhone}
                         placeholder="Enter state"
@@ -307,7 +310,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                     <InputField
+                    <InputField
                         lable={"District"}
                         icon={faUser}
                         placeholder="Enter district"
@@ -339,7 +342,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                       <InputField
+                    <InputField
                         lable={"Pin code"}
                         icon={faUser}
                         placeholder="Enter pin code"
@@ -355,7 +358,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                      <InputFieldSelect
+                    <InputFieldSelect
                         onChangeText={(text) => { setData({ ...data, address_proof: text }) }}
                         width={widthPercentageToDP(80)}
                         items={AddressProof}
@@ -366,24 +369,24 @@ showsVerticalScrollIndicator={false}
                         placeholder="Upload Document/Image"
                         icon={faFileArrowUp}
                     />
-                   
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
                     <Text style={[Gstyle.h2, Gstyle.redTheme]}>Permanent Address</Text>
                 </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2)}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-start ',marginBottom:heightPercentageToDP(2)}}>
-                <Text style={[Gstyle.h4,{marginBottom:heightPercentageToDP(2)}]}>Permanent Address</Text>
-                <View style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
-                <TouchableOpacity
-                onPress={() => { setData({ ...data, sendPaymentLink: !data?.sendPaymentLink }) }}
-                style={styles.checkbox}>
-                            {data?.sendPaymentLink && <FontAwesomeIcon icon={faCheck} size={20} color={'#C82026'} />}
-                        </TouchableOpacity>
-                        <Text style={[Gstyle.h4, Gstyle.redTheme]}>Same as current addr</Text>
-                </View>
-                </View>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start ', marginBottom: heightPercentageToDP(2) }}>
+                        <Text style={[Gstyle.h4, Gstyle.black, { marginBottom: heightPercentageToDP(2) }]}>Permanent Address</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-start' }}>
+                            <TouchableOpacity
+                                onPress={() => { setData({ ...data, sendPaymentLink: !data?.sendPaymentLink }) }}
+                                style={styles.checkbox}>
+                                {data?.sendPaymentLink && <FontAwesomeIcon icon={faCheck} size={20} color={'#C82026'} />}
+                            </TouchableOpacity>
+                            <Text style={[Gstyle.h4, Gstyle.redTheme]}>Same as current addr</Text>
+                        </View>
+                    </View>
+                    <InputField
                         lable={"Street"}
                         icon={faUser}
                         placeholder="Enter street"
@@ -398,7 +401,7 @@ showsVerticalScrollIndicator={false}
                         required={true}
                         hideLeftIcon={true}
                     />
-                       <InputField
+                    <InputField
                         lable={"State"}
                         icon={faPhone}
                         placeholder="Enter state"
@@ -414,7 +417,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                     <InputField
+                    <InputField
                         lable={"District"}
                         icon={faUser}
                         placeholder="Enter district"
@@ -446,7 +449,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                       <InputField
+                    <InputField
                         lable={"Pin code"}
                         icon={faUser}
                         placeholder="Enter pin code"
@@ -462,7 +465,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                      <InputFieldSelect
+                    <InputFieldSelect
                         onChangeText={(text) => { setData({ ...data, address_proof: text }) }}
                         width={widthPercentageToDP(80)}
                         items={AddressProof}
@@ -473,13 +476,13 @@ showsVerticalScrollIndicator={false}
                         placeholder="Upload Document/Image"
                         icon={faFileArrowUp}
                     />
-                   
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
                     <Text style={[Gstyle.h2, Gstyle.redTheme]}>Add bank account</Text>
                 </View>
-            <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90),borderWidth:0.5,borderColor:'#DDDDDD',marginBottom:heightPercentageToDP(2) }}>
-            <InputField
+                <View style={{ backgroundColor: 'white', padding: widthPercentageToDP(5), width: widthPercentageToDP(90), borderWidth: 0.5, borderColor: '#DDDDDD', marginBottom: heightPercentageToDP(2) }}>
+                    <InputField
                         lable={"Name"}
                         icon={faUser}
                         placeholder="Enter name"
@@ -494,7 +497,7 @@ showsVerticalScrollIndicator={false}
                         required={true}
                         hideLeftIcon={true}
                     />
-                       <InputField
+                    <InputField
                         lable={"Account Number"}
                         icon={faPhone}
                         placeholder="Enter Account Number"
@@ -510,7 +513,7 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                     <InputField
+                    <InputField
                         lable={"Bank Name"}
                         icon={faUser}
                         placeholder="Enter bank name"
@@ -542,8 +545,8 @@ showsVerticalScrollIndicator={false}
                         hideLeftIcon={true}
 
                     />
-                   
-                      <InputFieldSelect
+
+                    <InputFieldSelect
                         onChangeText={(text) => { setData({ ...data, address_proof: text }) }}
                         width={widthPercentageToDP(80)}
                         items={BankProof}
@@ -554,10 +557,10 @@ showsVerticalScrollIndicator={false}
                         placeholder="Upload Document/Image"
                         icon={faFileArrowUp}
                     />
-                   
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
-            <Button
+
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: heightPercentageToDP(2) }}>
+                    <Button
                         onPress={() => {
                         }}
                         color={"#ffffff"}
@@ -567,10 +570,10 @@ showsVerticalScrollIndicator={false}
                         borderColor={"#dddddd"}
                         textColor={"#000000"}
                         colorStart={"#ffffff"}
-colorEnd={"#ffffff"}
+                        colorEnd={"#ffffff"}
                     />
-                 
-                        <Button
+
+                    <Button
                         onPress={() => {
                         }}
                         color={"#C82026"}
@@ -578,8 +581,8 @@ colorEnd={"#ffffff"}
                         children={"Save"}
                         borderRadius={10}
                     />
-            </View>
-    </ScrollView>         
+                </View>
+            </ScrollView>
         </View>
     );
 };
@@ -602,10 +605,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 10,
-        marginTop:-0,
-        marginLeft:widthPercentageToDP(2)
+        marginTop: -0,
+        marginLeft: widthPercentageToDP(2)
     },
-  
+
 
 });
 

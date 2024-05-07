@@ -20,7 +20,7 @@ import moment from 'moment';
 const CreateLead = (props) => {
     const [stepTitle, setStepTitle] = useState(1);
     const [data, setData] = useState({});
-
+    const [loading, setLoading] = useState(false);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -43,10 +43,10 @@ const CreateLead = (props) => {
                 }
             };
             fetchData();
-    
+
             return () => {
-               setData({});
-               setStepTitle(1);
+                setData({});
+                setStepTitle(1);
             };
         }, [])
     );
@@ -71,11 +71,11 @@ const CreateLead = (props) => {
     const getUberStatus = async (id) => {
         const response = await APIService.uberStatus(id);
         console.log("getUberStatus==>", response.data.payload);
-        setData({ ...data, uberStatus: response.data?.payload, lead_status: id, sendPaymentLink: false, lead_source: "", uber_status: "", errorLeadStatus: "",uber_sub_status:"",amount:"",lead_channel:"",remark:"" })
+        setData({ ...data, uberStatus: response.data?.payload, lead_status: id, sendPaymentLink: false, lead_source: "", uber_status: "", errorLeadStatus: "", uber_sub_status: "", amount: "", lead_channel: "", remark: "" })
     }
     const setSubStatusId = (id) => {
         const selectedStatus = data?.uberStatus.find(item => item.id == id);
-        setData({ ...data, uber_sub_status: selectedStatus?.subStatusId, uber_status: id,errorUberStatus: '' })
+        setData({ ...data, uber_sub_status: selectedStatus?.subStatusId, uber_status: id, errorUberStatus: '' })
     }
 
     const validateSave = () => {
@@ -137,44 +137,46 @@ const CreateLead = (props) => {
         console.log("finalData==>", data)
         const user = await LocalStorage.get("user");
         console.log("user===>", user)
-       
-let body = {
-    "customerId": user?.customerId,
-    "branchId": user?.userActiveBranchId||0,
-    "leadName": data?.name || "",
-    "mobileNumber": data?.mobile ? data?.mobile + "":"",
-    "alternateMobileNumber": data?.alternate_mobile ? data?.alternate_mobile + "":"",
-    "drivingLicenseNumber": data?.driving_license ? data?.driving_license + "":"",
-    "panNumber": data?.pan_number || "",
-    "aadharNumber": data?.aadhar_number||"",
-    "leadSchemeId": data?.scheme || 0,
-    "leadStatusId": data?.lead_status || 0,
-    "uberStatusId": data?.uber_status || 0,
-    "leadSubstatusId": data?.uber_sub_status || 0,
-    "leadSourceId": data?.lead_source || 0,
-    "leadChannelId": data?.lead_channel || 0,
-    "followupDate": data?.follow_up_date ?  moment(data?.follow_up_date).format("YYYY-MM-DD HH:mm:ss") :"",
-    "remark": data?.remark || "",
-    "leadDepositAmount": 0,
-    "leadDepositReceivedAmount": data?.amount || 0,
-    "leadDepositDueAmount": 0,
-    "isPaymentLinkSent": data?.sendPaymentLink ? data?.sendPaymentLink : false,
-    "paymentLinkSentDate": "",
-    "leadReferalCode": data?.referral_code || "",
-    "userId": user?.userId,
-    "logDescription": "",
-    "machineName": "",
-    "receiptModeId": 0,
-    "transactionReferenceId": 0,
-    "transactionRemark": "",
-    "transactionAttachmentId": 0,
-    "transactionStatusId": 0,
-    "transactionAmount": data?.amount || 0
-  }
+
+        let body = {
+            "customerId": user?.customerId,
+            "branchId": user?.userActiveBranchId || 0,
+            "leadName": data?.name || "",
+            "mobileNumber": data?.mobile ? data?.mobile + "" : "",
+            "alternateMobileNumber": data?.alternate_mobile ? data?.alternate_mobile + "" : "",
+            "drivingLicenseNumber": data?.driving_license ? data?.driving_license + "" : "",
+            "panNumber": data?.pan_number || "",
+            "aadharNumber": data?.aadhar_number || "",
+            "leadSchemeId": data?.scheme || 0,
+            "leadStatusId": data?.lead_status || 0,
+            "uberStatusId": data?.uber_status || 0,
+            "leadSubstatusId": data?.uber_sub_status || 0,
+            "leadSourceId": data?.lead_source || 0,
+            "leadChannelId": data?.lead_channel || 0,
+            "followupDate": data?.follow_up_date ? moment(data?.follow_up_date).format("YYYY-MM-DD HH:mm:ss") : "",
+            "remark": data?.remark || "",
+            "leadDepositAmount": 0,
+            "leadDepositReceivedAmount": data?.amount || 0,
+            "leadDepositDueAmount": 0,
+            "isPaymentLinkSent": data?.sendPaymentLink ? data?.sendPaymentLink : false,
+            "paymentLinkSentDate": "",
+            "leadReferalCode": data?.referral_code || "",
+            "userId": user?.userId,
+            "logDescription": "",
+            "machineName": "",
+            "receiptModeId": 0,
+            "transactionReferenceId": 0,
+            "transactionRemark": "",
+            "transactionAttachmentId": 0,
+            "transactionStatusId": 0,
+            "transactionAmount": data?.amount || 0
+        }
+        setLoading(true)
         const response = await APIService.createLead(body);
+        setLoading(false)
         // console.log("response==>", response?.data);
         if (response?.data?.success) {
-            Alert.alert('Success', 'Lead Created Successfully', [{ text: 'OK', onPress: () => {props.navigation.goBack()} }]);
+            Alert.alert('Success', 'Lead Created Successfully', [{ text: 'OK', onPress: () => { props.navigation.goBack() } }]);
         } else {
             Alert.alert('Error', response?.data?.message || 'Something went wrong', [{ text: 'OK', onPress: () => { } }]);
         }
@@ -292,7 +294,7 @@ let body = {
                             if (text == 1 || text == 2) {
                                 getUberStatus(text)
                             } else {
-                                setData({ ...data, lead_status: text, sendPaymentLink: false, lead_source: null, uber_status: null, errorLeadStatus: null,uber_sub_status:"",amount:"",lead_channel:"",remark:"" })
+                                setData({ ...data, lead_status: text, sendPaymentLink: false, lead_source: null, uber_status: null, errorLeadStatus: null, uber_sub_status: "", amount: "", lead_channel: "", remark: "" })
 
                             }
 
@@ -305,14 +307,15 @@ let body = {
                         labelColor="#444"
                         placeholder="Select lead status"
                         icon={faAddressCard}
-                        message={(data?.lead_status == 1 && <Text style={{ fontStyle: 'italic', }}>Deposit Amount to be paid by driver <Text style={{ color: 'black', fontWeight: 'bold' }}>Rs. 3000</Text></Text>)}
+                        message={(data?.lead_status == 1 && <Text style={{ fontStyle: 'italic', color: "#666666" }}>Deposit Amount to be paid by driver <Text style={{ color: 'black', fontWeight: 'bold' }}>Rs. 3000</Text></Text>)}
                         error={data?.errorLeadStatus}
                     />
                     {
                         data?.lead_status == 1 && <InputFieldSelect
-                            onChangeText={(text) => { 
+                            onChangeText={(text) => {
                                 // setData({ ...data, uber_status: text, errorUberStatus: '' }),
-                                setSubStatusId(text) }}
+                                setSubStatusId(text)
+                            }}
                             width={widthPercentageToDP(90)}
                             items={data?.uberStatus}
                             label={"Uber Status"}
@@ -470,6 +473,7 @@ let body = {
                         width={widthPercentageToDP(40)}
                         children={"Previous"}
                         borderRadius={10}
+
                     />
                     <Button
                         onPress={() => {
@@ -479,6 +483,7 @@ let body = {
                         width={widthPercentageToDP(40)}
                         children={"Save"}
                         borderRadius={10}
+                        loading={loading}
                     />
                 </View>}
                 {(data?.sendPaymentLink && data?.lead_status == 1) && <Button
@@ -489,6 +494,7 @@ let body = {
                     width={widthPercentageToDP(90)}
                     children={"Send payment link"}
                     borderRadius={10}
+                    loading={loading}
                 />}
 
             </ScrollView>

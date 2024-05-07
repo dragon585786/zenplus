@@ -15,17 +15,17 @@ const LeadDetailsUpdate = (props) => {
     const renderHistoryItem = ({ item }) => (
         <View style={styles.historyItem}>
             <FontAwesomeIcon icon={item.icon} size={20} color={item.color} />
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.agent}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(35) }]}>{item.description}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(20) }]}>{item.agent}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(35) }]}>{item.description}</Text>
 
         </View>
     );
     const renderPaymentItem = ({ item }) => (
         <View style={styles.historyItem}>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.amount}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.mode}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(20) }]}>{item.amount}</Text>
+            <Text style={[Gstyle.h5, Gstyle.black, { width: widthPercentageToDP(20) }]}>{item.mode}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: widthPercentageToDP(25) }}>
                 <FontAwesomeIcon icon={item.icon} size={20} color={item.color} />
             </View>
@@ -33,10 +33,10 @@ const LeadDetailsUpdate = (props) => {
     );
     const renderDocumentItem = ({ item }) => (
         <View style={styles.historyItem}>
-            <FontAwesomeIcon icon={faCheckCircle} size={20} color={"green"} style={{ marginRight: widthPercentageToDP(5) }} />
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(30) }]}>{item.document}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.description}</Text>
-            <Text style={[Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
+            <FontAwesomeIcon icon={faCheckCircle} size={20} color={"green"} style={{ color: "black", marginRight: widthPercentageToDP(5) }} />
+            <Text style={[Gstyle.black, Gstyle.h5, { width: widthPercentageToDP(30) }]}>{item.document}</Text>
+            <Text style={[Gstyle.black, Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.description}</Text>
+            <Text style={[Gstyle.black, Gstyle.h5, { width: widthPercentageToDP(20) }]}>{item.date}</Text>
             <FontAwesomeIcon icon={item.icon} size={20} color={item.color} />
         </View>
     );
@@ -275,39 +275,39 @@ const LeadDetailsUpdate = (props) => {
                         (status == "Training Pending" || status == "Training Completed" || status == "Initial Payment") && <TouchableOpacity
                             onPress={() => props.navigation.navigate('DriverOnBoarding')}
                             style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                            <Text>Driver Onboarding</Text>
+                            <Text style={{ color: 'black' }}>Driver Onboarding</Text>
                         </TouchableOpacity>
                     }
 
                     {(status == "QC Pending" || status == "Initial Payment") && <TouchableOpacity
                         onPress={() => { props.navigation.navigate("DriverTrainingSchedule") }}
                         style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                        <Text>Driver Training</Text>
+                        <Text style={{ color: 'black' }}>Driver Training</Text>
                     </TouchableOpacity>}
 
 
 
                     {
                         (status == "QC Rejected") && <TouchableOpacity style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                            <Text>Reupload</Text>
+                            <Text style={{ color: 'black' }}>Reupload</Text>
                         </TouchableOpacity>
                     }
                     {(status == "QC Rejected" || status == "Initial Payment" || status == "Training Completed" || status == "Training Pending") && <TouchableOpacity style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                        <Text>Refund Request</Text>
+                        <Text style={{ color: 'black' }}>Refund Request</Text>
                     </TouchableOpacity>
                     }
                     {
                         status == "QC Pending" && <TouchableOpacity style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                            <Text>Driver Document</Text>
+                            <Text style={{ color: 'black' }}>Driver Document</Text>
                         </TouchableOpacity>
                     }
 
                     {status == "QC Pending" && <TouchableOpacity style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                        <Text>Guarantor Info</Text>
+                        <Text style={{ color: 'black' }}>Guarantor Info</Text>
                     </TouchableOpacity>}
                     {
                         status == "QC Pending" && <TouchableOpacity style={{ padding: widthPercentageToDP(2), borderRadius: 10, borderWidth: 1, borderColor: 'grey', marginVertical: 5, paddingVertical: heightPercentageToDP(2) }}>
-                            <Text>Reject</Text>
+                            <Text style={{ color: 'black' }}>Reject</Text>
                         </TouchableOpacity>
                     }
 

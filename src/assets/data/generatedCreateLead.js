@@ -222,3 +222,6 @@ const dataInfoLeads = {
     "sendPaymentLink": true,
     "uber_status": 6
 }
+
+// "@react-native-community/masked-view": "^0.1.11",
+// "@react-native-masked-view/masked-view": "^0.3.1",

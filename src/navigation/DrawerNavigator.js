@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
 import DashBoard from '../screens/Dashboard/Dashboard';
 import { globalScreenOptions } from './globalScreenOption';
-import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faArrowRight, faArrowRightFromBracket, faBars, faChartBar, faChartSimple, faList, faMedal, faUser } from '@fortawesome/free-solid-svg-icons';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
@@ -111,18 +111,31 @@ function DrawerContent(props) {
           )}
           labelStyle={{ color: props.state.routeNames[props.state.index] === 'Logout' ? 'red' : '#343434' }}
           onPress={() => {
-            setLoggedIn(false)
-            LocalStorage.set('loggedIn', false)
+            Alert.alert(
+              'Are you sure?',
+              'Do you really want to logout?',
+              [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                {
+                  text: 'OK', onPress: () => {
+                    setLoggedIn(false)
+                    LocalStorage.set('loggedIn', false)
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
           }}
         />
+
       </View>
       <View style={{ paddingBottom: heightPercentageToDP(2), paddingHorizontal: widthPercentageToDP(2), justifyContent: "center", alignItems: 'center' }}>
         <Text style={{ color: "#383838" }}>Version: 1.1.0</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Text>Powered by </Text>
+          <Text style={{ color: "#383838" }}>Powered by </Text>
           <Image source={require('@/assets/images/Logo-2022.png')} />
         </View>
-        <Text>© Copyright 2024 UTWiz. Privacy Policy</Text>
+        <Text style={{ color: "#383838" }}>© Copyright 2024 UTWiz. Privacy Policy</Text>
       </View>
     </View>
   );

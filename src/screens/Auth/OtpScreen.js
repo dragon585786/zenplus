@@ -1,5 +1,5 @@
 // create a screen for otp
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ImageBackground, TextInput, Image, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import Gstyle from '@/assets/styles/global';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
@@ -15,8 +15,15 @@ const OtpScreen = (props) => {
   const OTP = props?.route?.params?.data?.otp + "" || ""
   const mobile = props?.route?.params?.data?.mobile || ""
   const { loggedIn, setLoggedIn } = useContext(UserContext);
-
-  var currentLocation = getCurrentLocation()
+  const [loading, setLoading] = useState(false)
+  const [currentLocation, setCurrentLocation] = useState({})
+  useEffect(() => {
+    const getLocation = async () => {
+      let currentLocationn = await getCurrentLocation()
+      setCurrentLocation(currentLocationn)
+    }
+    getLocation()
+  }, [])
   console.log("currentLocation==>", currentLocation);
   const handleSendAgain = async () => {
     const re = /^[6-9]\d{9}$/;
@@ -24,7 +31,9 @@ const OtpScreen = (props) => {
       const body = {
         userName: mobile
       }
+      setLoading(true)
       const response = await APIService.authenticateOtp(body)
+      setLoading(false)
       if (!response?.data?.success) {
         Alert.alert("Error", "Failed to send OTP");
         return;
@@ -43,38 +52,38 @@ const OtpScreen = (props) => {
 
   }
   const handleValidateOtp = async () => {
-    if(!currentLocation?.latitude){
+    if (!currentLocation?.latitude) {
       currentLocation = await getCurrentLocation()
-      return 
+      return
     }
-      const body = {
-        userName: mobile + "",
-        otp: props?.route?.params?.data?.otp,
-        sessionId: props?.route?.params?.data?.sessionId,
-        assetTypeId: 2,
-        imei: "",
-        applicationTypeTd: 2,
-        applicationName: "Mobile",
-        applicationVersion: "1.0",
-        osVersion: "",
-        make: 2024,
-        model: "Plexitech",
-        mfgName: "Plexitech.com",
-        dataState: "",
-        geolocationStatus: "",
-        firebaseToken: "",
-        latitude: currentLocation?.latitude,
-        longitude: currentLocation?.longitude     
-      }
-      const response = await APIService.validateOtp(body)
-      if (!response?.data?.success) {
-        Alert.alert("Error", "Failed to Login");
-        return;
-      }
-      console.log("login ho gaya")
-     await LocalStorage.set("user", response?.data?.payload)
-     await LocalStorage.set("loggedIn", true)
-      setLoggedIn(true);
+    const body = {
+      userName: mobile + "",
+      otp: props?.route?.params?.data?.otp,
+      sessionId: props?.route?.params?.data?.sessionId,
+      assetTypeId: 2,
+      imei: "",
+      applicationTypeTd: 2,
+      applicationName: "Mobile",
+      applicationVersion: "1.0",
+      osVersion: "",
+      make: 2024,
+      model: "Plexitech",
+      mfgName: "Plexitech.com",
+      dataState: "",
+      geolocationStatus: "",
+      firebaseToken: "",
+      latitude: currentLocation?.latitude,
+      longitude: currentLocation?.longitude,
+    }
+    const response = await APIService.validateOtp(body)
+    if (!response?.data?.success) {
+      Alert.alert("Error", "Failed to Login");
+      return;
+    }
+    console.log("login ho gaya")
+    await LocalStorage.set("user", response?.data?.payload)
+    await LocalStorage.set("loggedIn", true)
+    setLoggedIn(true);
 
     return
 
@@ -128,7 +137,10 @@ const OtpScreen = (props) => {
                 textAlign: "center",
                 marginHorizontal: widthPercentageToDP(0.5),
                 borderBottomColor: '#C82026',
-                borderBottomWidth: 2
+                borderBottomWidth: 2,
+                color: "black",
+                fontSize: 24,
+                fontWeight: 'bold'
               }}
             />
           </View>
@@ -138,6 +150,7 @@ const OtpScreen = (props) => {
               handleValidateOtp()
             }}
             children="LOGIN"
+            loading={loading}
           />
           <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <Text style={[Gstyle.p, { color: "#121212" }]}>I haven't received anything

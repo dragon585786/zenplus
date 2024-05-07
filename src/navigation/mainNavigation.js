@@ -5,17 +5,18 @@ import { NonAuthStack } from "./NonAuthStack";
 import { LocalStorage } from "../Utils/LocalStorage";
 
 export const MainNavigation = () => {
-    const { loggedIn } = useContext(UserContext);
-    const [loggedInn, setLoggedInn] = useState(false);
+  const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const [loggedInn, setLoggedInn] = useState(false);
 
-    useEffect(() => {
-      async function fetchData() {
-        let log = await LocalStorage.get("loggedIn");
-        setLoggedInn(loggedIn);
-        setLoggedInn(log);
-      }
-      fetchData() 
-    },[loggedIn])
-  
-    return (loggedInn === true && loggedIn) ? <MyTabs /> : <NonAuthStack />;
-  };
+  useEffect(() => {
+    async function fetchData() {
+      let log = await LocalStorage.get("loggedIn");
+      setLoggedIn(log);
+      setLoggedInn(log);
+    }
+    fetchData()
+  }, [loggedIn])
+  console.log("loggedInn==>", loggedInn);
+  console.log("loggedIn==>", loggedIn);
+  return (loggedInn && loggedIn) ? <MyTabs /> : <NonAuthStack />;
+};
